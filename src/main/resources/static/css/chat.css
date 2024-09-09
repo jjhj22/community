@@ -141,3 +141,37 @@ ul li strong {
 #createRoomBtn:hover {
     background-color: #0056b3;
 }
+
+#db{
+    position: absolute;
+    top:50px;
+    right: 50px;
+    margin:0 auto;
+    box-sizing: border-box;
+    padding:0;
+
+
+}
+#deleteBox{
+    margin:0;
+    border:1px solid #f13b3b;
+    border-radius: 3px;
+    background-color: #f13b3b;
+    color:white;
+}
+#goHomeButton{
+    position: absolute;
+    top:50px;
+    right:110px;
+    margin:0;
+    border:1px solid #007bff;
+    border-radius: 3px;
+    background-color: #007bff;
+    color:white;
+    padding:10px 20px;
+    text-align: center;
+}
+#chatRoom-title{
+    color:#007bff;
+    text-align: center;
+}

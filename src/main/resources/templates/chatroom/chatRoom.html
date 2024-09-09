@@ -7,37 +7,27 @@
 
 </head>
 <body>
-<div>
-  <h1>채팅방</h1>
 
-  <button id="goHomeButton" class="home-button">홈으로 가기</button>
-  <div>
     <ul>
       <li th:each="message : ${messages}">
-        <strong th:text="${message.sender}"></strong>: <span th:text="${message.message}"></span>
+        <strong th:text="'익명'"> </strong> <span th:text="${message.message}"></span>
         <em th:text="${message.timestamp}"></em>
       </li>
     </ul>
   </div>
 
+  <!-- 채팅치기 -->
   <form th:action="@{/chatroom/{chatRoomId}/message(chatRoomId=${chatRoomId})}" method="post">
-    <input type="text" name="sender" placeholder="이름" required>
     <input type="text" name="message" placeholder="메시지" required>
     <button type="submit">보내기</button>
   </form>
 </div>
-<table>
-  <tr th:each="chatRoom : ${chatRooms}">
-    <td th:text="${chatRoom.id}"></td>
-    <td th:text="${chatRoom.name}"></td>
-    <td>
+
       <!-- 채팅방 개별 삭제 버튼 -->
-      <form th:action="@{/chatroom/delete/{id}(id=${chatRoom.id})}" method="post">
-        <button type="submit">삭제</button>
+      <form th:action="@{/chatroom/delete/{id}(id=${chatRoomId})}" method="post" id="db">
+          <button type="submit" id="deleteBox">삭제</button>
       </form>
-    </td>
-  </tr>
-</table>
+      <button id="goHomeButton" class="home-button">홈</button>
 
 </body>
 </html>

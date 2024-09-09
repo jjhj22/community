@@ -18,6 +18,8 @@ public class ChatRoomController {
     @Autowired
     private ChatRoomService chatRoomService;
 
+
+    //채팅방 삭제
     @PostMapping("/delete/{id}")
     public String deleteChatRoom(@PathVariable("id") Long id) {
         chatRoomService.deleteChatRoomById(id);
