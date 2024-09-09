@@ -4,6 +4,7 @@ import com.community.Dto.ChatRoomDto;
 import com.community.Entity.ChatRoom;
 import com.community.Service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,14 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/chatroom")
 @RequiredArgsConstructor
 public class ChatRoomController {
+    @Autowired
+    private ChatRoomService chatRoomService;
 
-    private final ChatRoomService chatRoomService;
+    @PostMapping("/delete/{id}")
+    public String deleteChatRoom(@PathVariable("id") Long id) {
+        chatRoomService.deleteChatRoomById(id);
+        return "redirect:/chatroom/manage"; // 삭제 후 채팅방 목록 페이지로 리다이렉트
+    }
 
     // 이름 입력 페이지로 이동
     @GetMapping("/nameRegistration")
@@ -50,6 +57,12 @@ public class ChatRoomController {
         return "chatroom/manage"; // 통합된 페이지 이름
     }
 
+    // 채팅방 생성 페이지
+    @GetMapping("/create")
+    public String createChatroomForm() {
+        return "chatroom/createChatroom"; // 채팅방 생성 페이지
+    }
+
     // 채팅방 생성
     @PostMapping("/create")
     public String createChatRoom(@ModelAttribute ChatRoomDto chatRoomDto, HttpSession session) {
@@ -77,4 +90,6 @@ public class ChatRoomController {
         model.addAttribute("chatRooms", chatRoomService.searchChatRooms(keyword));
         return "chatroom/manage"; // 검색 후 통합 페이지로 리다이렉트
     }
+
+
 }

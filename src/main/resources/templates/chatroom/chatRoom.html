@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>채팅방</title>
+  <link rel="stylesheet" href="/css/chat.css">
+
 </head>
 <body>
 <div>
   <h1>채팅방</h1>
 
+  <button id="goHomeButton" class="home-button">홈으로 가기</button>
   <div>
     <ul>
       <li th:each="message : ${messages}">
@@ -22,7 +25,27 @@
     <input type="text" name="message" placeholder="메시지" required>
     <button type="submit">보내기</button>
   </form>
-  <a href="/chatroom/manage">목록</a>
 </div>
+<table>
+  <tr th:each="chatRoom : ${chatRooms}">
+    <td th:text="${chatRoom.id}"></td>
+    <td th:text="${chatRoom.name}"></td>
+    <td>
+      <!-- 채팅방 개별 삭제 버튼 -->
+      <form th:action="@{/chatroom/delete/{id}(id=${chatRoom.id})}" method="post">
+        <button type="submit">삭제</button>
+      </form>
+    </td>
+  </tr>
+</table>
+
 </body>
 </html>
+
+<script>
+
+  document.getElementById('goHomeButton').addEventListener('click', function() {
+    window.location.href = '/chatroom/manage';
+  });
+
+</script>
