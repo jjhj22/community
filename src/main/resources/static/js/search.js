@@ -1,3 +1,4 @@
+// search.js
 document.addEventListener('DOMContentLoaded', function() {
     var searchQuery = document.getElementById('search-query');
     var chatroomListItems = Array.from(document.querySelectorAll('#chatroom-list li'));
@@ -68,8 +69,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         updatePagination(items);
+
+        // li 요소 클릭 시 채팅방으로 이동
+        items.forEach(function(item) {
+            item.addEventListener('click', function() {
+                var link = item.querySelector('a');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            });
+        });
     }
 
     // 초기 렌더링
     renderPage(chatroomListItems);
+
+    // 기타 스크립트 파일의 코드
+    // deleteForm.js와 navigation.js의 코드는 이 파일에서 호출하지 않고,
+    // 해당 파일에서 별도로 관리하세요.
 });

@@ -115,10 +115,18 @@ ul li {
     max-width: 600px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 전환 효과 추가 */
 }
 
-ul li strong {
+ul li a {
+    text-decoration: none;
     color: #007bff;
+    transition: color 0.3s; /* 부드러운 전환 효과 추가 */
+}
+
+ul li a:hover {
+    color: white; /* 제목이 흰색으로 변경 */
 }
 
 /* 채팅방 목록 스타일 */
@@ -128,22 +136,13 @@ ul li strong {
     max-width: 600px;
 }
 
-#chatroom-list li {
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+#chatroom-list li:hover {
+    background-color: #007bff; /* 배경색 변경 */
+    color: white; /* 텍스트 색상 변경 */
 }
 
-#chatroom-list li a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-#chatroom-list li a:hover {
-    text-decoration: underline;
+#chatroom-list li:hover a {
+    color: white; /* 제목 색상 변경 */
 }
 
 /* 홈 버튼 스타일 */
@@ -193,7 +192,7 @@ ul li strong {
     margin-top: 100px;
 }
 
-/* 페이지네이션 */
+/* 페이지 만들기 */
 #pagination {
     text-align: center;
     margin-top: 20px;
