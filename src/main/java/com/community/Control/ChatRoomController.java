@@ -5,6 +5,8 @@ import com.community.Entity.ChatRoom;
 import com.community.Service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,26 +21,24 @@ public class ChatRoomController {
     private ChatRoomService chatRoomService;
 
 
-    // 채팅방 삭제 (비밀번호 검증)
+    // 채팅방 삭제
     @PostMapping("/delete/{id}")
-    public String deleteChatRoom(@PathVariable("id") Long id, @RequestParam("password") String password, HttpSession session) {
+    @ResponseBody
+    public ResponseEntity<String> deleteChatRoom(@PathVariable("id") Long id, @RequestParam("password") String password, HttpSession session) {
         String userName = (String) session.getAttribute("userName");
         ChatRoom chatRoom = chatRoomService.findById(id);
 
-        // 채팅방이 존재하고, 생성자가 현재 세션의 유저와 동일한지 확인
         if (chatRoom != null && chatRoom.getCreator().equals(userName)) {
-
-            // 비밀번호 검증 (암호화 제거 - 평문 비교)
             if (password.equals(chatRoom.getPassword())) {
                 chatRoomService.deleteChatRoomById(id);
-                return "redirect:/chatroom/manage"; // 삭제 후 채팅방 목록 페이지로 리다이렉트
+                return ResponseEntity.ok("success");
             } else {
-                // 비밀번호가 틀린 경우 처리
-                return "redirect:/chatroom/" + id + "?error=incorrect_password"; // 비밀번호 틀림
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("비밀번호가 틀렸습니다.");
             }
         }
-        return "redirect:/chatroom/manage"; // 채팅방이 없거나 권한이 없는 경우
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("채팅방이 존재하지 않거나 권한이 없습니다.");
     }
+
 
     // 이름 입력 페이지로 이동
     @GetMapping("/nameRegistration")

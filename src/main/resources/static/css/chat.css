@@ -1,9 +1,58 @@
+/* 기존 스타일 유지 */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* 채팅방 생성 버튼을 페이지 상단 중앙에 고정 */
+#createRoomBtn {
+    position: fixed; /* 페이지 상단에 고정 */
+    top: 30px; /* 상단 여백 */
+    left: 50%; /* 중앙에 배치 */
+    transform: translateX(-50%); /* 중앙 정렬 */
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+}
+
+#createRoomBtn:hover {
+    background-color: #0056b3;
+}
+
+/* 검색 창 스타일 */
+#search-form {
+    display: flex;
+    justify-content: center;
+    margin: 80px auto 20px; /* 상단 여백 추가 */
+}
+
+#search-query {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#search-form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#search-form button:hover {
+    background-color: #0056b3;
 }
 
 /* 헤더 스타일 */
@@ -37,7 +86,7 @@ form input, form button {
 }
 
 form input {
-    width: calc(100% - 22px); /* Adjust width to fit within the form */
+    width: calc(100% - 22px);
 }
 
 form button {
@@ -97,101 +146,49 @@ ul li strong {
     text-decoration: underline;
 }
 
-/* 검색 창 스타일 */
-#search-form {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
-#search-query {
-    padding: 10px;
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#search-form button {
-    padding: 10px 15px;
+/* 홈 버튼 스타일 */
+#goHomeButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #007bff;
+    border-radius: 3px;
     background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-#search-form button:hover {
-    background-color: #0056b3;
-}
-
-/* 버튼 스타일 */
-#createRoomBtn {
-    display: inline-block;
     padding: 10px 20px;
-    margin: 20px auto;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
     text-align: center;
+    cursor: pointer;
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
 }
 
-#createRoomBtn:hover {
+#goHomeButton:hover {
     background-color: #0056b3;
 }
 
-#db{
-    position: absolute;
-    top:50px;
-    right: 50px;
-    margin:0 auto;
-    box-sizing: border-box;
-    padding:0;
-
-
-}
-#deleteBox{
-    margin:0;
-    border:1px solid #f13b3b;
-    border-radius: 3px;
-    background-color: #f13b3b;
-    color:white;
-}
-#goHomeButton{
-    position: absolute;
-    top:50px;
-    right:110px;
-    margin:0;
-    border:1px solid #007bff;
-    border-radius: 3px;
-    background-color: #007bff;
-    color:white;
-    padding:10px 20px;
-    text-align: center;
-}
-#chatRoom-title{
-    color:#007bff;
-    text-align: center;
-}
-#deleteForm{
-    display: none;
-}
+/* 채팅방 삭제 버튼 스타일 */
 #showDeleteFormButton {
+    position: absolute;
+    top: 60px;
+    right: 20px;
     display: inline-block;
     padding: 10px 20px;
-    margin: 20px auto;
     border-radius: 4px;
     border: 1px solid #007bff;
-    background-color: #007bff;
-    color: white;
     cursor: pointer;
+    color: white;
     text-align: center;
     text-decoration: none;
+    background-color: #007bff;
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
 }
 
 #showDeleteFormButton:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    cursor: pointer;
+}
+
+#deleteForm {
+    display: none;
+}
+#chatbody{
+    margin-top:100px;
 }
