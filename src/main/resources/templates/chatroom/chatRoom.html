@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>채팅방</title>
-  <link rel="stylesheet" href="/css/chat.css">
-
+    <meta charset="UTF-8">
+    <title>채팅방</title>
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 <body>
+<script src="/js/manage.js"></script>
 
-    <ul>
-      <li th:each="message : ${messages}">
+<ul>
+    <li th:each="message : ${messages}">
         <strong th:text="'익명'"> </strong> <span th:text="${message.message}"></span>
         <em th:text="${message.timestamp}"></em>
-      </li>
-    </ul>
-  </div>
+    </li>
+</ul>
 
-  <!-- 채팅치기 -->
-  <form th:action="@{/chatroom/{chatRoomId}/message(chatRoomId=${chatRoomId})}" method="post">
+<!-- 채팅치기 -->
+<form th:action="@{/chatroom/{chatRoomId}/message(chatRoomId=${chatRoomId})}" method="post">
     <input type="text" name="message" placeholder="메시지" required>
     <button type="submit">보내기</button>
-  </form>
-</div>
+</form>
 
-      <!-- 채팅방 개별 삭제 버튼 -->
-      <form th:action="@{/chatroom/delete/{id}(id=${chatRoomId})}" method="post" id="db">
-          <button type="submit" id="deleteBox">삭제</button>
-      </form>
-      <button id="goHomeButton" class="home-button">홈</button>
+
+<!-- 채팅방 개별 삭제 버튼 -->
+<button id="showDeleteFormButton"><i class="bi bi-trash"></i></button>
+
+<form th:action="@{/chatroom/delete/{id}(id=${chatRoomId})}" method="post" id="deleteForm">
+    <label for="deletePassword">비밀번호:</label>
+    <input type="password" id="deletePassword" name="password" placeholder="비밀번호를 입력하세요" required>
+    <button type="submit">삭제</button>
+    <button type="button" id="cancelDelete">취소</button>
+</form>
+
+<button id="goHomeButton" class="home-button"><i class="bi bi-house-door"></i></button>
+
+
 
 </body>
 </html>
-
-<script>
-
-  document.getElementById('goHomeButton').addEventListener('click', function() {
-    window.location.href = '/chatroom/manage';
-  });
-
-</script>

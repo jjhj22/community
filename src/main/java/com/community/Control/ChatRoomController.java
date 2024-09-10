@@ -19,11 +19,25 @@ public class ChatRoomController {
     private ChatRoomService chatRoomService;
 
 
-    //채팅방 삭제
+    // 채팅방 삭제 (비밀번호 검증)
     @PostMapping("/delete/{id}")
-    public String deleteChatRoom(@PathVariable("id") Long id) {
-        chatRoomService.deleteChatRoomById(id);
-        return "redirect:/chatroom/manage"; // 삭제 후 채팅방 목록 페이지로 리다이렉트
+    public String deleteChatRoom(@PathVariable("id") Long id, @RequestParam("password") String password, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        ChatRoom chatRoom = chatRoomService.findById(id);
+
+        // 채팅방이 존재하고, 생성자가 현재 세션의 유저와 동일한지 확인
+        if (chatRoom != null && chatRoom.getCreator().equals(userName)) {
+
+            // 비밀번호 검증 (암호화 제거 - 평문 비교)
+            if (password.equals(chatRoom.getPassword())) {
+                chatRoomService.deleteChatRoomById(id);
+                return "redirect:/chatroom/manage"; // 삭제 후 채팅방 목록 페이지로 리다이렉트
+            } else {
+                // 비밀번호가 틀린 경우 처리
+                return "redirect:/chatroom/" + id + "?error=incorrect_password"; // 비밀번호 틀림
+            }
+        }
+        return "redirect:/chatroom/manage"; // 채팅방이 없거나 권한이 없는 경우
     }
 
     // 이름 입력 페이지로 이동
@@ -65,7 +79,7 @@ public class ChatRoomController {
         return "chatroom/createChatroom"; // 채팅방 생성 페이지
     }
 
-    // 채팅방 생성
+    // 채팅방 생성 (비밀번호 암호화 없이 평문 저장)
     @PostMapping("/create")
     public String createChatRoom(@ModelAttribute ChatRoomDto chatRoomDto, HttpSession session) {
         String userName = (String) session.getAttribute("userName");
@@ -73,11 +87,16 @@ public class ChatRoomController {
         // 유저 이름이 세션에 있을 때만 채팅방 생성
         if (userName != null) {
             chatRoomDto.setCreator(userName);
+
+            // 비밀번호 평문 저장 (암호화 없이)
+            chatRoomDto.setPassword(chatRoomDto.getPassword());
+
             ChatRoom createdChatRoom = chatRoomService.createChatRoom(chatRoomDto);
             return "redirect:/chatroom/" + createdChatRoom.getId();
         }
         return "redirect:/chatroom/manage"; // 관리 페이지로 리다이렉트
     }
+
 
     // 채팅방 검색
     @GetMapping("/search")

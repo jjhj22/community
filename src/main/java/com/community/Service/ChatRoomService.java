@@ -23,6 +23,11 @@ public class ChatRoomService {
     @Autowired
     private final ChatRoomRepository chatRoomRepository;
 
+    // 채팅방 ID로 찾기 (삭제 시 비밀번호 검증에 필요)
+    public ChatRoom findById(Long id) {
+        return chatRoomRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 ID의 채팅방을 찾을 수 없습니다: " + id));
+    }
 
 
     // 채팅방 삭제
