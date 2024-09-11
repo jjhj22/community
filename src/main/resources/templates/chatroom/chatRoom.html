@@ -13,15 +13,20 @@
 <script src="/js/navigation.js"></script>
 
 <ul>
-    <li th:each="message : ${messages}">
-        <strong th:text="'익명'"> </strong> <span th:text="${message.message}"></span>
+    <li th:each="message : ${messages}" id="chat">
+        <strong th:text="'익명'"> </strong>
+        <span th:text="${message.message}"></span>
+        <div>
         <em th:text="${message.timestamp}"></em>
+            <i class="bi bi-x"></i>
+        </div>
+
     </li>
 </ul>
 
 <!-- 채팅치기 -->
 <form th:action="@{/chatroom/{chatRoomId}/message(chatRoomId=${chatRoomId})}" method="post">
-    <input type="text" name="message" placeholder="메세지를 입력하세요" required>
+    <input type="text" name="message" placeholder="메세지를 입력하세요" required id="sendMessage">
     <button type="submit">보내기</button>
 </form>
 

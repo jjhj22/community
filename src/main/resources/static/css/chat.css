@@ -226,3 +226,11 @@ ul li strong {
     margin: 0 10px;
     font-weight: bold;
 }
+
+.bi-x{
+    color:#007bff;
+    left:150px;
+}
+#chat{
+    width:300px; !important;
+}
