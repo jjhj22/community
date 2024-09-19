@@ -9,7 +9,6 @@
 </head>
 <body>
 <!-- JavaScript 파일 연결 -->
-<script src="/js/search.js"></script>
 <script src="/js/deleteForm.js"></script>
 <script src="/js/navigation.js"></script>
 <script src="/js/deleteMessage.js"></script>
@@ -18,7 +17,9 @@
 <input type="hidden" id="chatRoomId" value="${chatRoom.id}">
 
 <ul id="chatroom-list">
-    <li th:each="message : ${messages}" id="message-{message.id}">
+    <li th:each="message : ${messages}"
+        th:class="${message.sender == currentUser ? 'my-message' : 'other-message'}"
+        id="message-{message.id}">
         <strong>익명</strong>
         <span th:text="${message.message}"></span>
         <div>
@@ -27,9 +28,6 @@
         </div>
     </li>
 </ul>
-
-<!-- 페이지네이션 추가 -->
-<div id="pagination"></div>
 
 <!-- 채팅치기 -->
 <form id="messageForm" th:action="@{/chatroom/{chatRoomId}/message(chatRoomId=${chatRoom.id})}" method="post">
