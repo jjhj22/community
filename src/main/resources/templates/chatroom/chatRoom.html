@@ -11,10 +11,11 @@
 <!-- JavaScript 파일 연결 -->
 <script src="/js/deleteForm.js"></script>
 <script src="/js/navigation.js"></script>
-<script src="/js/deleteMessage.js"></script>
 
 <!-- 숨겨진 채팅방 ID 입력 필드 추가 -->
 <input type="hidden" id="chatRoomId" value="${chatRoom.id}">
+<!-- 배경음악 -->
+<audio src="/music/bright-and-playful-tune-237030.mp3" controls autoplay loop id="bgm"></audio>
 
 <ul id="chatroom-list">
     <li th:each="message : ${messages}">

@@ -151,7 +151,7 @@ ul li strong {
 #messageForm {
     position: fixed; /* 페이지 하단에 고정 */
     bottom: 20px; /* 페이지 하단에서 20px 위에 위치 */
-    left: 80%; /* 중앙 정렬 */
+    left: 77%;
     transform: translateX(-50%); /* 중앙 정렬 보정 */
     width: 100%; /* 전체 너비 사용 */
     max-width: 500px; /* 최대 너비 설정 */
@@ -340,4 +340,11 @@ ul li strong {
     padding: 10px 20px;
     text-align: center;
     cursor: pointer;
+}
+/* 배경음악 */
+#bgm{
+    position:fixed;
+    bottom:30px;
+    right: 20px;
+    width:100px;
 }
