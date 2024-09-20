@@ -224,7 +224,7 @@ ul li strong {
     right: 20px;
     display: inline-block;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid #34b534;
     cursor: pointer;
     color: white;
@@ -336,4 +336,18 @@ ul li strong {
 .other-message {
     text-align: left; /* 왼쪽 정렬 */
     background-color: #f8d7da; /* 다른 사용자 메시지 배경색 */
+}
+
+/* 첫 화면(이름 적는 페이지)로 이동*/
+#out{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #34b534;
+    border-radius: 3px;
+    background-color: #34b534;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
 }

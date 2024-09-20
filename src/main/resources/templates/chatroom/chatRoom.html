@@ -17,14 +17,12 @@
 <input type="hidden" id="chatRoomId" value="${chatRoom.id}">
 
 <ul id="chatroom-list">
-    <li th:each="message : ${messages}"
-        th:class="${message.sender == currentUser ? 'my-message' : 'other-message'}"
-        id="message-{message.id}">
+    <li th:each="message : ${messages}">
         <strong>익명</strong>
         <span th:text="${message.message}"></span>
         <div>
             <em th:text="${message.timestamp}"></em>
-            <i class="bi bi-x delete-message" data-message-id="${message.id}"></i>
+            <i class="bi bi-x delete-message"></i>
         </div>
     </li>
 </ul>
