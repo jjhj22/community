@@ -2,7 +2,6 @@ package com.community.Control;
 
 import com.community.Dto.ChatMessageDto;
 import com.community.Entity.ChatMessage;
-import com.community.Repository.ChatMessageRepository;
 import com.community.Service.ChatMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,7 +22,6 @@ import java.util.NoSuchElementException;
 public class ChatMessageController {
 
     private final ChatMessageService chatMessageService;
-    private final ChatMessageRepository chatMessageRepository;
 
     // 메시지 전송 기능
     @PostMapping("/{chatRoomId}/message")
@@ -49,30 +47,4 @@ public class ChatMessageController {
         return "chatroom/chatRoom";
     }
 
-    // 메시지 삭제 기능
-    @DeleteMapping("/{chatRoomId}/message/{messageId}/delete")
-    public ResponseEntity<?> deleteMessage(@PathVariable Long chatRoomId, @PathVariable Long messageId) {
-        try {
-            chatMessageService.deleteMessage(chatRoomId, messageId);
-            return ResponseEntity.ok().body(Collections.singletonMap("상태", "성공"));
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("상태", "찾을 수 없음"));
-        } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("상태", "잘못된 요청"));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("상태", "서버 오류"));
-        }
-    }
-
-    // 메시지 단건 조회 기능
-    @GetMapping("/chatmessages/{id}")
-    @ResponseBody
-    public ResponseEntity<ChatMessage> getMessage(@PathVariable Long id) {
-        ChatMessage message = chatMessageService.getMessageById(id);
-        if (message != null) {
-            return ResponseEntity.ok(message);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

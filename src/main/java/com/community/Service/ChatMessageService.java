@@ -46,20 +46,4 @@ public class ChatMessageService {
         }).collect(Collectors.toList());
     }
 
-    public void deleteMessage(Long chatRoomId, Long messageId) {
-        ChatMessage message = chatMessageRepository.findById(messageId)
-                .orElseThrow(() -> new RuntimeException("Message not found"));
-
-        if (!message.getChatRoom().getId().equals(chatRoomId)) {
-            throw new RuntimeException("Message does not belong to this chat room");
-        }
-
-        chatMessageRepository.deleteById(messageId);
-    }
-
-    @Transactional(readOnly = true)
-    public ChatMessage getMessageById(Long messageId) {
-        return chatMessageRepository.findByIdCustom(messageId)
-                .orElseThrow(() -> new RuntimeException("Message not found"));
-    }
 }
