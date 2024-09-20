@@ -21,7 +21,7 @@
         <strong>익명</strong>
         <span th:text="${message.message}"></span>
         <div>
-            <em th:text="${message.timestamp}"></em>
+            <em class="timestamp" th:text="${message.timestamp}"></em>
             <i class="bi bi-x delete-message"></i>
         </div>
     </li>
@@ -55,3 +55,12 @@
 
 </body>
 </html>
+
+<script>
+    document.querySelectorAll('.timestamp').forEach(el => {
+        const timestamp = el.textContent; // timestamp를 가져옵니다
+        // 필요한 포맷으로 변환합니다 (예: '2024-09-20 14:30:00' -> '14:30')
+        const formattedTime = new Date(timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        el.textContent = formattedTime; // 변환된 시간을 출력합니다
+    });
+</script>
